@@ -1,0 +1,41 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #3d1e1e;
+    color: #391e1e;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #3a63e8;
+}
+
+.contact-item {
+    background-color: #cdcdcd;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-item h2 {
+    color: #a0b2ec;
+    margin-top: 0;
+}
+
+.contact-item p {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+}

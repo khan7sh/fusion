@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Orbit Owl</title>
+    <link href="/tailwindcss/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a14;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #3a63e8;
+        }
+        #signupCount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4cc9f0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3a63e8;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #4cc9f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+            <button id="signoutBtn" class="btn">Sign Out</button>
+        </div>
+        <p class="mb-4">Total sign-ups: <span id="signupCount">0</span></p>
+        <a href="/download-csv" class="btn" id="downloadCsv">Download CSV</a>
+    </div>
+
+    <script>
+        fetch('/contacts')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('signupCount').textContent = data.length;
+            })
+            .catch(error => console.error('Error:', error));
+
+        document.getElementById('signoutBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/admin/logout', { method: 'POST' });
+                if (response.ok) {
+                    window.location.href = '/admin-login.html';
+                } else {
+                    console.error('Logout failed');
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+            }
+        });
+    </script>
+</body>
+</html>
