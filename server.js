@@ -226,7 +226,7 @@ app.get('/download-csv', adminAuth, async (req, res, next) => {
 });
 
 // Chatbot endpoint
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+//const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 app.post('/api/chat', async (req, res) => {
   try {
