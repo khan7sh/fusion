@@ -1,10 +1,10 @@
 # Ignore .env file
-   .env
+.env
 
-   # Ignore node_modules
-   node_modules/
-   /dist
-   /.parcel-cache
+# Ignore node_modules
+node_modules/
+/dist
+/.parcel-cache
 
-   # Ignore log files
-   *.lognode_modules/
+# Ignore log files
+*.log
