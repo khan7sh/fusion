@@ -387,7 +387,7 @@
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
   
-      fetch('/submit-form', {
+      fetch('/.netlify/functions/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
