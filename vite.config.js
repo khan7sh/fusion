@@ -10,5 +10,4 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  root: '.', // Ensure this points to the directory containing index.html
 })

@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 
 :root {
@@ -77,19 +77,7 @@ nav {
     color: var(--secondary-blue);
 }
 
-.btn {
-    background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
-    color: var(--text-color);
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: opacity 0.3s ease;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
+/* Remove or comment out any conflicting styles, especially those related to buttons and header */
 
 .hero {
     padding: 150px 0 100px;
