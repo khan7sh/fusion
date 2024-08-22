@@ -694,7 +694,7 @@ body .timeline-line {
     top: 0 !important;
     bottom: 0 !important;
     width: 2px !important;
-    background-color: var(--text-color) !important;
+    background-color: #FFFFFF !important;
     transform: translateX(-50%) !important;
 }
 
@@ -704,12 +704,12 @@ body .process-step {
 }
 
 body .step-content {
-    background-color: rgba(74, 14, 78, 0.3) !important;
+    background-color: rgba(138, 43, 226, 0.15) !important;
     border-radius: 10px !important;
     padding: 20px !important;
     max-width: 45% !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    border: 1px solid rgba(74, 14, 78, 0.5) !important;
+    border: 1px solid rgba(138, 43, 226, 0.3) !important;
 }
 
 body .process-step:nth-child(odd) .step-content {
@@ -881,7 +881,7 @@ body .timeline-line {
     top: 0;
     bottom: 0;
     width: 2px;
-    background-color: var(--secondary-color);
+    background-color: #FFFFFF;
     transform: translateX(-50%);
 }
 
@@ -891,11 +891,12 @@ body .process-step {
 }
 
 body .step-content {
-    background-color: var(--card-background);
+    background-color: rgba(138, 43, 226, 0.15);
     border-radius: 10px;
     padding: 20px;
     max-width: 45%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 body .process-step:nth-child(odd) .step-content {

@@ -6,9 +6,9 @@
     "src/script.js"
   ],
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist",
-    "dev": "parcel index.html"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",

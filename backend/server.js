@@ -82,8 +82,13 @@ const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(32).toStr
 app.use(session({
   secret: sessionSecret,
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: process.env.NODE_ENV === 'production', httpOnly: true, sameSite: 'strict' }
+  saveUninitialized: false,
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production', 
+    httpOnly: true, 
+    sameSite: 'strict',
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // Set up rate limiting
@@ -102,7 +107,7 @@ const adminAuth = async (req, res, next) => {
   if (req.session.isAdmin) {
     next();
   } else {
-    logger.warn('Unauthorized access attempt to admin route');
+    logger.warn('Unauthorized access attempt to admin route', { path: req.path });
     res.status(401).json({ message: 'Unauthorized' });
   }
 };
@@ -175,13 +180,17 @@ app.post('/admin/login', async (req, res, next) => {
         res.status(401).json({ message: 'Invalid credentials' });
       }
     } catch (error) {
-      logger.error('Error during admin login', { error: error.message });
+      logger.error('Error during admin login', { error: error.message, stack: error.stack });
       next(error);
     }
   } else {
     logger.warn('Invalid admin login attempt', { username });
     res.status(401).json({ message: 'Invalid credentials' });
   }
+});
+
+app.get('/admin/check-session', (req, res) => {
+  res.json({ isAdmin: !!req.session.isAdmin });
 });
 
 app.post('/admin/logout', (req, res) => {
@@ -210,6 +219,10 @@ app.get('/contacts', adminAuth, async (req, res, next) => {
 app.get('/download-csv', adminAuth, async (req, res, next) => {
   try {
     const contacts = await Contact.find().sort({ date: -1 });
+    if (!contacts || contacts.length === 0) {
+      logger.warn('No contacts found for CSV download');
+      return res.status(404).json({ message: 'No contacts found' });
+    }
     const fields = ['name', 'email', 'budget', 'message', 'date'];
     const opts = { fields };
     const parser = new Parser(opts);
@@ -220,7 +233,7 @@ app.get('/download-csv', adminAuth, async (req, res, next) => {
     res.setHeader('Content-Disposition', 'attachment; filename=contacts.csv');
     res.send(csv);
   } catch (error) {
-    logger.error('Error generating CSV', { error: error.message });
+    logger.error('Error generating CSV', { error: error.message, stack: error.stack });
     next(error);
   }
 });
@@ -258,11 +271,11 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-app.get('/temp-admin-login', (req, res) => {
-  req.session.isAdmin = true;
-  logger.warn('Temporary admin login used');
-  res.send('Temporary admin login successful. <a href="/admin">Go to admin page</a>');
-});
+// Ensure these environment variables are set
+if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD_HASH) {
+  console.error('ADMIN_USERNAME and ADMIN_PASSWORD_HASH must be set in the environment');
+  process.exit(1);
+}
 
 // Global error handler
 const errorHandler = (err, req, res, next) => {

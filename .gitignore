@@ -3,8 +3,8 @@
 
 # Ignore node_modules
 node_modules/
-/dist
-/.parcel-cache
+.parcel-cache/
+dist/
 
 # Ignore log files
 *.log
