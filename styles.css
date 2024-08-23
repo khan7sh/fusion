@@ -38,16 +38,8 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-body {
     color: var(--text-color);
     background-color: #000000;
-    margin-top: 0;
-    padding-top: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 main {
@@ -55,24 +47,28 @@ main {
     flex: 1;
 }
 
-/* Update body padding */
-body {
-    padding-top: 0; /* Remove the padding-top we had for the fixed header */
+/* Header styles */
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0; /* Increased padding for higher header */
 }
 
 /* Hero Section */
 .hero {
-    min-height: 80vh; /* Reduced from 100vh */
+    min-height: 100vh; /* Increased to full viewport height */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 60px 0 80px; /* Reduced padding */
+    padding: 150px 0 100px; /* Increased top padding */
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at center, #1A0635 0%, #0A0A0A 70%, #000000 100%) !important;
+    background: linear-gradient(to bottom, #0A0A0A, #000000) !important;
     color: var(--text-color);
-    padding-top: 120px;
 }
 
 .hero::before {
@@ -82,13 +78,27 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(26, 6, 53, 0.1) 100%);
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.2) 0%, rgba(26, 6, 53, 0.05) 25%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(138, 43, 226, 0.2) 0%, rgba(26, 6, 53, 0.05) 25%, transparent 50%);
     z-index: 1;
+    opacity: 0.7;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(26, 6, 53, 0.1) 100%);
+    z-index: 2;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;
@@ -97,21 +107,23 @@ body {
 }
 
 .hero-title {
-    color: var(--text-color) !important;
+    color: #FFFFFF !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 1.5rem;
     font-weight: 700;
     line-height: 1.2;
-    font-size: 3.5rem !important;
+    font-size: 4rem !important; /* Increased font size */
 }
 
 .hero-title .highlight {
-    color: #B19CD9; /* Light purple color */
+    color: #FFFFFF; /* Changed to white */
     font-weight: 700;
     display: inline-block;
     position: relative;
 }
 
+/* Remove or comment out the ::after pseudo-element if you don't want the underline effect */
+/*
 .hero-title .highlight::after {
     content: '';
     position: absolute;
@@ -119,7 +131,7 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background-color: #B19CD9; /* Light purple color */
+    background-color: #B19CD9;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s ease-out;
@@ -129,11 +141,12 @@ body {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+*/
 
 .hero-subtitle {
-    color: var(--text-color) !important;
+    color: #E0E0E0 !important; /* Slightly dimmed for better contrast */
     opacity: 0.9;
-    font-size: 2rem;
+    font-size: 1.5rem; /* Reduced font size for better hierarchy */
     margin-bottom: 2.5rem;
     max-width: 800px;
     margin-left: auto;
@@ -176,28 +189,29 @@ body {
     gap: 20px;
 }
 
+/* Button styles */
 .btn-primary,
 .btn-secondary,
 .btn-large {
-    background-color: var(--text-color);
-    color: var(--accent-color);
+    background-color: var(--secondary-color);
+    color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-radius: 30px;
+    border-radius: 5px; /* Reduced border-radius for a more minimalistic look */
     padding: 12px 30px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     transition: all 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
 }
 
 .btn-primary:hover,
 .btn-secondary:hover,
 .btn-large:hover {
-    background-color: var(--accent-color);
-    color: var(--text-color);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    background-color: #7B2ABF; /* Slightly darker shade on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes pulse {
@@ -214,11 +228,11 @@ body {
 
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 2.5rem !important;
     }
 
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
     }
 
     .hero-features {
@@ -238,14 +252,6 @@ body {
 
     .hero-content {
         padding: 30px;
-    }
-
-    .hero-title {
-        font-size: 2.5rem !important;
-    }
-
-    .hero-subtitle {
-        font-size: 1.4rem;
     }
 }
 
@@ -297,9 +303,9 @@ body {
 }
 
 .services {
-    background: linear-gradient(135deg, #1A0635 0%, #0A0A0A 100%);
+    background: #0A0A0A;
     color: var(--text-color);
-    padding: 80px 0;
+    padding: 100px 0;
     position: relative;
     overflow: hidden;
 }
@@ -359,14 +365,14 @@ body {
 }
 
 .service-card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #FFFFFF;
     border-radius: 10px;
     padding: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .service-card:hover {
@@ -376,22 +382,34 @@ body {
 
 .service-card i {
     font-size: 2.5rem;
-    color: var(--text-color);
+    color: var(--secondary-color);
     margin-bottom: 15px;
 }
 
 .service-card h3 {
-    color: var(--secondary-color);
+    color: var(--text-color-dark);
     margin-bottom: 10px;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 .service-card p {
-    color: var(--text-color);
+    color: #333333;
     font-size: 0.9rem;
     line-height: 1.6;
     font-weight: 400;
+}
+
+.service-card::before {
+    content: attr(data-number);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 
 #book-call-btn {
@@ -689,12 +707,12 @@ body {
 }
 
 .step-content {
-    background-color: rgba(138, 43, 226, 0.15) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
     border-radius: 10px !important;
     padding: 20px !important;
     max-width: 45% !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    border: 1px solid rgba(138, 43, 226, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .process-step:nth-child(odd) .step-content {
@@ -759,12 +777,12 @@ body {
 }
 
 .step-content {
-    background-color: rgba(74, 14, 78, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 20px;
     max-width: 45%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(74, 14, 78, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .process-step:nth-child(odd) .step-content {
@@ -814,7 +832,7 @@ body {
 
     .step-content {
         max-width: calc(100% - 40px);
-        margin-left: 40px !important;
+        margin-left: 40px;
     }
 
     .step-number {
@@ -1130,7 +1148,7 @@ html {
 }
 
 .ai-automation .section-title {
-    color: var(--secondary-color);
+    color: var(--text-color);
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
@@ -1403,14 +1421,14 @@ html {
 }
 
 .service-card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #FFFFFF;
     border-radius: 10px;
     padding: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .service-card:hover {
@@ -1420,19 +1438,19 @@ html {
 
 .service-card i {
     font-size: 2.5rem;
-    color: var(--text-color);
+    color: var(--secondary-color);
     margin-bottom: 15px;
 }
 
 .service-card h3 {
-    color: var(--secondary-color);
+    color: var(--text-color-dark);
     margin-bottom: 10px;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 .service-card p {
-    color: var(--text-color);
+    color: #333333;
     font-size: 0.9rem;
     line-height: 1.6;
     font-weight: 400;
@@ -1471,7 +1489,7 @@ html {
 }
 
 body .about-us-title {
-    color: #BA55FF;
+    color: #ffffff;
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
@@ -1601,6 +1619,7 @@ html {
     height: 2px;
     background-color: var(--secondary-color);
     transform: scaleX(1);
+    transform-origin: bottom right;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -1613,6 +1632,7 @@ html {
     height: 2px;
     background-color: var(--secondary-color);
     transform: scaleX(0);
+    transform-origin: bottom left;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -1640,6 +1660,7 @@ body .nav-links a::after {
     height: 2px;
     background-color: var(--secondary-color);
     transform: scaleX(0);
+    transform-origin: bottom left;
     transition: transform 0.3s ease-in-out;
 }
 
