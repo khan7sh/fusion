@@ -70,7 +70,7 @@ const Chatbot = () => {
   );
 
   return (
-    <div className={`chatbot-container floating-chatbot ${isOpen ? 'open' : ''}`}>
+    <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
       <button
         onClick={toggleChat}
         className="chat-toggle-btn"
@@ -82,9 +82,6 @@ const Chatbot = () => {
         <div className="chatbot-box">
           <div className="chatbot-header">
             <span>Azam from OrbiFusion</span>
-            <button onClick={toggleChat} className="close-btn" aria-label="Close chat">
-              <i className="fas fa-times"></i>
-            </button>
           </div>
           <div className="chatbot-messages">
             {messages.map(renderMessage)}
