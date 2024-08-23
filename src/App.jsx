@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles.css';
 import Chatbot from './components/Chatbot';
-import Header from './components/Header';
+import Header from './components/header';
 
 function App() {
   return (
