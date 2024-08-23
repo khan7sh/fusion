@@ -3,9 +3,15 @@
  * @see https://v0.dev/t/T9EguR8m6Jv
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-[#1A202C] to-[#6B46C1]">
       <div className="container flex items-center justify-between px-4 md:px-6 py-4">
@@ -14,7 +20,7 @@ export default function Header() {
           <span className="text-lg text-white">OrbiFusion</span>
         </a>
         <div className="flex items-center gap-6">
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className={`md:flex items-center gap-6 ${isMenuOpen ? 'flex flex-col absolute top-full left-0 right-0 bg-[#1A202C] p-4' : 'hidden'}`}>
             {[
               { name: 'Home', href: '#home' },
               { name: 'Services', href: '#services' },
@@ -27,6 +33,7 @@ export default function Header() {
                 href={item.href}
                 className="text-sm font-medium transition-colors text-white hover:text-[#f0f0f0]"
                 data-text={item.name}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </a>
@@ -40,7 +47,10 @@ export default function Header() {
           >
             Book a Call
           </a>
-          <button className="md:hidden bg-white text-[#6B46C1] p-2 rounded-md hover:bg-[#f0f0f0] transition-colors duration-300 ease-in-out">
+          <button 
+            className="md:hidden bg-white text-[#6B46C1] p-2 rounded-md hover:bg-[#f0f0f0] transition-colors duration-300 ease-in-out"
+            onClick={toggleMenu}
+          >
             <MenuIcon className="h-6 w-6" />
             <span className="sr-only">Toggle navigation menu</span>
           </button>
